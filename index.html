@@ -1,0 +1,434 @@
+<!doctype html>
+
+<!--
+  This is a simple example / template impress.js slide show. The goal is to be
+  easier to read for a first timer than the official and very feature rich
+  demo by bartaz (http://bartaz.github.io/impress.js/). It's also a very
+  traditional presentation that looks like slides (square screens with bullet
+  points...), again to make a first timer feel more at home. From this simple
+  presentation you can then go on to more powerful impress.js presentations!
+  
+  This example is hopefully helpful for people that want to create both
+  simple and (eventually) awesome presentations in impress.js and comfortable
+  doing that directly in HTML.
+  
+  By: @henrikingo (Still based on the HTML from bartaz' demo.)  
+    
+-->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <!--        
+        Impress.js doesn't depend on any external stylesheets. It adds all of the styles it needs for the
+        presentation to work. 
+        
+        However, some of the `extras/` modules do come with their own CSS, and we load
+        them here. You can read about each extras module separately in their directory.
+    -->
+    <link rel="stylesheet" href="../../extras/highlight/styles/github.css">
+    <link rel="stylesheet" href="../../extras/mermaid/mermaid.forest.css">
+
+    <!-- This file contains common styles for example presentations. -->
+    <link href=".\css\impress-common.css" rel="stylesheet" />   
+    <!--
+        This file contains styles specific for this example presentation. 
+    -->
+    <link href="css/classic-slides.css" rel="stylesheet" />
+    <style>
+        /* ==|== print styles =======================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; } /* Black prints faster: h5bp.com/s */
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+  thead { display: table-header-group; } /* h5bp.com/t */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+
+  /* Impress.js specific */
+  .fallback-message { display: none; }
+  @page land {size: landscape;}
+  .step { page-break-inside: avoid; page-break-after: always; border: none; margin-top: 100px; }
+  .step img { max-height: 100%; }
+
+  /* plus some more step specific styles of your own
+  #htop2 { display: none }
+   */
+}
+    </style>
+</head>
+
+<!--
+    
+    Body element is used by impress.js to set some useful class names, that will allow you to detect
+    the support and state of the presentation in CSS or other scripts.
+    
+    First very useful class name is `impress-not-supported`. This class means, that browser doesn't
+    support features required by impress.js, so you should apply some fallback styles in your CSS.
+    It's not necessary to add it manually on this element. If the script detects that browser is not
+    good enough it will add this class, but keeping it in HTML means that users without JavaScript
+    will also get fallback styles.
+    
+    When impress.js script detects that browser supports all required features, this class name will
+    be removed.
+    
+    Another class name on body element also depends on currently active presentation step.    
+-->
+<body class="impress-not-supported">
+<!--
+    This fallback message is only visible when there is `impress-not-supported` class on body.
+-->
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<!--
+    This is the core element used by impress.js: the wrapper for your presentation steps. 
+    In this element all the impress.js magic happens.
+    
+    data-transition-duration sets the time in microseconds that is used for the
+    animation when transtitioning between slides.
+    
+    The width, height, scale and perspective options define a target screen size that you should
+    design your CSS against. impress.js will automatically scale all content to different screen
+    sizes. See DOCUMENTATION.md for details. Below, I have targeted full HD screen resolution.
+    
+    data-autoplay can be used to set the time in seconds, after which presentation
+    automatically moves to next slide. It can also be set individually for each
+    slide, but here we just set a common duration for all slides.
+-->
+<div id="impress"
+    data-transition-duration="1000"
+
+    data-width="1920"
+    data-height="1080"
+    data-max-scale="3"
+    data-min-scale="0"
+    data-perspective="1000">
+
+    <!--
+        Each step of the presentation should be an element inside the `#impress` with a class name
+        of `step`. These step elements are positioned, rotated and scaled by impress.js, and
+        the 'camera' shows them on each step of the presentation.
+        
+        The `id` attribute of the step element is used to identify it in the URL, but it's optional.
+        If it is not defined, it will get a default value of `step-N` where N is a number of slide.
+        This step is auto-assigned the id "step-1". You can also use `#step-1` in a link, to 
+        point directly to this particular step.
+        
+        Positioning information is passed through data-* attributes.
+        
+        In the example below we only specify x and y position of the step element with `data-x="-1000"`
+        and `data-y="-1500"` attributes. This means that **the center** of the element (yes, the center)
+        will be positioned in point x = -1000px and y = -1500px of the presentation 'canvas'. It will not 
+        be rotated or scaled.
+        
+        The "step" class is what *must* be used for every "slide". In this example we also use the "slide"
+        class, which adds a rectangle with some background and makes this presentation look like a traditional
+        powerpoint slide show. The "slide" class is entirely optional and indeed you wouldn't use it for
+        your cooler impress.js presentations.
+    -->
+    <div class="step slide title" data-x="-2200" data-y="-3000">
+        <h1>SCION Pathdiscovery - Design and Implementation of a Multipath library <br />
+            </h1>
+        <h2>Marten Gartner, David Hausheer, Thorben Krüger, Nicolas With, Karola Graichen</h2>
+        <h3>2021</h3>
+
+        <div class="notes">
+        Any element with the class="notes" will not be displayed. This can
+        be used for speaker notes. In fact, the impressConsole plugin will
+        show it in the speaker console!
+        </div>
+    </div>
+
+    <!--<div id="toc" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Table of Contents</h1>
+        <ul>
+            <li><a href="#step-1">Title</a></li>
+            <li><a href="#step-2">Table of Contents</a></li>
+            <li><a href="#step-3">Introduction</a></li>
+            <li><a href="#step-4">High Speed Router</a></li>
+            <li><a href="#step-5">High Speed Dispatcher</a></li>
+            <li><a href="#step-6">First Results</a></li>
+            <li><a href="#step-7">Conclusion</a></li>
+            <li><a href="#step-8">Next steps</a></li>
+        </ul>
+
+        <div class="notes">
+           <p>Table of Contents, with links to other slides of this same presentation.</p>
+         
+           <p>Note that instead of absolute positioning we use relative positioning,
+           with the data-rel-x and data-rel-y attributes. This means the step is
+           positioned relative to the foregoing step. In other words, this is 
+           equivalent to data-x="0" data-y="-3000".</p>
+        </div>
+    </div>-->
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>SCION Pathdiscovery</h1>
+        <ul>
+            <li>Leverage SCION's path-awareness to discover fast and reliable content lookup and delivery</li>
+            <li>Pathselection to find an "optimal" pathset</li>
+            <li>Multipath usage to lookup and deliver content</li>
+            <ul>
+            <p style="text-align: left; margin-top: 2em;">Goal: Design, implement and evaluate a multipath library, mainly supporting Bittorrent, but also other applications</p>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Additional Goals</h1>
+        <ul>
+            <li>Provide an interface for customizable Pathselection to applications</li>
+            <li>Provide abstractions that may be used independently</li>
+            <li>Reuse existing projects for collecting information (e.g. RTT) and for path failover </li>
+            <li>Provide a library that will hopefully support other applications than Bittorrent</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Current State</h1>
+        <ul>
+            <li>Prototype implementation done so far</li>
+            <li>SCION/UDP socket implemented, SCION/QUIC will be the next</li>
+            <li>Customizable pathselection with useful defaults implemented</li>
+            <li>Starting to extend collection of information for pathselection</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Design</h1>
+        <div class="img-container">
+            <img src="images/implementation.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 55%"/>
+        </div>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Connection setup</h1>
+        <div class="img-container">
+            <img src="images/connection-setup.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 55%"/>
+        </div>
+        <ul>
+            <li>Goal: Support independent multipath in both directions</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <!--<div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Concept</h1>
+        <div class="img-container">
+            <img src="images/concept.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 35%"/>
+            </div>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Implementation: Abstractions</h1>
+        <ul>
+            <li>MPPeerSock: Represents a multipath socket to a particular peer</li>
+            <li>UnderlaySocket: Provides listen and connect methods that return TransportConnections</li>
+            <li>TransportConnection: Abstracts underlay connections providing metrics and read/write methods</li>
+            <li>PacketScheduler: Handles outgoing/incoming SCION packets, decides how to distribute packets over the selected pathset</li>
+            <li>PathQualityDB: Serves as database for PathQuality entries</li>
+            <li>CustomPathSelection: Provides an interface to implement custom path selection algorithms</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>-->
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Challenges: Collecting Information</h1>
+        <div class="img-container">
+            <img src="images/measurements.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 35%"/>
+        </div>
+        <ul>
+            <li>Passive measurements are more favorite</li>
+            <li>Socket itself does not know if full bandwidth is used, if responses are sent back immediatly, etc</li>
+            <li>Without further knowledge, only estimations possible</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Challenges: Hidden Multipath</h1>
+        <div class="img-container">
+            <img src="images/hidden-mp.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 55%"/>
+        </div>
+        <ul>
+            <li>Idea: Application writes a stream of data that is distributed over multiple paths</li>
+            <li>But: Without dedicated multipath protocol, data will probably arrive out-of-order</li>
+            <li>E.g. In Bittorrent not required, each path could be seen as peer</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Challenge: Combine existing projects</h1>
+        <div class="img-container">
+            <img src="images/mplibs.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 65%"/>
+        </div>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <!--
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Bittorrent Solution: Address-level Peers</h1>
+        <ul>
+            <li>For Bittorrent, we can see every connection (over a path) as a peer</li>
+            <li>Bittorrent has its own mechanism to distribute data over those paths</li>
+            <li>The MPPeerSock can provide connections over the selected paths to Bittorrent</li>
+            <li>No need for "hidden" multipath</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+    -->
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Conclusion</h1>
+        <ul>
+            <li>Implement general-purpose multipath library is hard</li>
+            <li>Without futher knowledge, passive measurements are difficult</li>
+            <li>Implementing "hidden" multipath is really challenging (and maybe not worth the effort?)</li>
+            <li>Significantly different requirements of applications increase difficulty for multipath libraries</li>
+            <li>But: We have already a lot of knowledge and code, that we could combine</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Next steps</h1>
+        <ul>
+            <li>Apply mulitpath library to Bittorrent over SCION</li>
+            <li>Move out of prototype status</li>
+            <li>Start merging features of existing projects</li>
+            <li style="margin-top: 2em;"><b>And: Get feedback to create an easily (re)usable and helpful library</b></li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide">
+        <h1 style="margin-top: 20%;">Thanks for your attention!</h1>
+        <h3>Please feel invited to share your feedback and any related projects with me!</h3>
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Links:</h1>
+        <ul>
+            <li>https://github.com/netsys-lab/scion-path-discovery</li>
+        </ul>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Challenges: Abstract Connection</h1>
+        <ul>
+            <li>Goal: Make underlying connections (SCION/UDP, SCION/QUIC, ...) exchangeable</li>
+            <li>Listen/accept for incoming connections: No support in UDP</li>
+            <li>For UDP, mulitpath traffic traffic still comes over a single connection on receiver side</li>
+            <li>With QUIC not, there are separate connections (streams)</li>
+        </ul>
+        <p style="text-align: left; margin-top: 2em;">So: Is it useful to abstract those different types into one interface?</p>
+        <div class="notes">
+        </div>
+    </div>
+
+    <div class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Sample Code</h1>
+        <div class="img-container">
+            <img src="images/mppeersock.jpg" 
+            alt="SCION BT setup" class="fullscreen-img" style="width: 65%"/>
+        </div>
+
+        <div class="notes">
+        </div>
+    </div>
+
+    <!-- This last, empty "slide" is set to be very large using the data-scale attribute, 
+         so that it covers all the other slides you just saw. 
+         It's a common way of zooming out at the end, to show the whole presentation.
+         In CSS, we set pointer-events:none to make this slide non-clickable. 
+         It makes a difference at least for SVG content, such as the mermaid diagram. -->
+    <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+    </div>
+</div>
+
+<!--
+    Add navigation-ui controls: back, forward and a select list.
+    Add a progress indicator bar (current step / all steps)
+    Add the help popup plugin
+-->
+<div id="impress-toolbar"></div>
+
+<div class="impress-progressbar"><div></div></div>
+<div class="impress-progress"></div>
+
+<div id="impress-help"></div>
+
+<!-- Extra modules
+     Load highlight.js, mermaid.js, markdown.js and MathJax.js from extras.
+     If you're curious about details, these are initialized in src/plugins/extras/extras.js -->
+<script type="text/javascript" src="../../extras/highlight/highlight.pack.js"></script>
+<script type="text/javascript" src="../../extras/mermaid/mermaid.min.js"></script>
+<script type="text/javascript" src="../../extras/markdown/markdown.js"></script>
+<script type="text/javascript" src="../../extras/mathjax/MathJax.js?config=TeX-AMS_CHTML"></script>
+<!--
+    To make all described above really work, you need to include impress.js in the page.
+    You also need to call a `impress().init()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. 
+-->
+<script type="text/javascript" src="./js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
